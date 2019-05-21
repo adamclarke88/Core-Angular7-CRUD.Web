@@ -1,6 +1,6 @@
 <div class="jumbotron">
 
-  <h1 class="display-4 text-center">Payment Detail Register</h1>
+  <h1 class="display-4 text-center" id="testID">Payment Detail Register</h1>
 
   <hr>
 
@@ -10,6 +10,10 @@
     </div>
     <div class="col-md-7">
       <app-payment-detail-list></app-payment-detail-list>
+      <button (click)="showConsoleMessage()" class="btn btn-success" id="goButton">Go</button>
+      <div>
+        {{message}} {{testMessage}}
+      </div>
     </div>
   </div>
   

@@ -1,35 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { PaymentDetailService } from '../shared/payment-detail.service';
+import { Injectable } from '@angular/core';
+import { PaymentDetail } from './payment-detail.model';
 import { HttpClient } from '@angular/common/http'
-import { PaymentDetail } from '../shared/payment-detail.model';
 
+@Injectable({
+    providedIn: 'root'
+  })
 
-@Component({
-  selector: 'app-payment-details',
-  templateUrl: './payment-details.component.html',
-  styleUrls: ['./payment-details.component.css']
-})
-export class PaymentDetailsComponent implements OnInit {
-
-  constructor(private service: PaymentDetailService, private http:HttpClient) { }
-  
+export class DashbaordService {
+    formData: PaymentDetail
   readonly rootURL = 'http://localhost:62266/api';
   list: PaymentDetail[];
-  
-  message = "hello from payment details component";
+  results: PaymentDetail;
 
+  constructor(private http:HttpClient) {}
 
-  ngOnInit() {
-    console.log("on init message from payment-details component");
-  }
-
-  showConsoleMessage(){
-    console.log("button click worked");
-    var test = this.service.refreshList();
-    console.log("this is the object results from payment details component");
-  }
-
-  refreshList(){
+  dashboardInfo(){
     this.http.get(this.rootURL + '/PaymentDetail')
     .toPromise()
     .then( res => this.list = res as PaymentDetail[])
@@ -52,5 +37,4 @@ export class PaymentDetailsComponent implements OnInit {
     // var test = results.find(x => x.PMId == 1);
     // console.log(test);
   }
-
 }
